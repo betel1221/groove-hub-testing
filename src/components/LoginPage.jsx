@@ -13,7 +13,7 @@ const SPOTIFY_SCOPES = [
   'playlist-modify-public',
 ];
 
-const authUrl = `https://accounts.spotify.com/authorize?client_id=${SPOTIFY_CLIENT_ID}&redirect_uri=${SPOTIFY_REDIRECT_URI}&scope=${SPOTIFY_SCOPES.join(' ')}&response_type=token&show_dialog=true`;
+const authUrl = `https://accounts.spotify.com/authorize?client_id=${SPOTIFY_CLIENT_ID}&redirect_uri=${encodeURIComponent(SPOTIFY_REDIRECT_URI)}&scope=${encodeURIComponent(SPOTIFY_SCOPES.join(' '))}&response_type=token&show_dialog=true`;
 
 export default function LoginPage() {
   return (
