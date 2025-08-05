@@ -1,6 +1,8 @@
 export const authEndpoint = "https://accounts.spotify.com/authorize";
-const redirectUri = process.env.REACT_APP_SPOTIFY_REDIRECT_URI;
-const clientId = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
+
+// Correct variable assignments
+const clientId = process.env.VITE_SPOTIFY_CLIENT_ID;
+const redirectUri = process.env.VITE_SPOTIFY_REDIRECT_URI;
 
 const scopes = [
   "user-read-private",
