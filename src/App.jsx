@@ -24,20 +24,26 @@ function App() {
   });
   const [selectedPlaylistId, setSelectedPlaylistId] = useState(null);
 
-  useEffect(() => {
-    // Check for access token in URL hash on app load
-    const hash = window.location.hash;
-    let tokenFromHash = window.localStorage.getItem('spotify_token');
+   useEffect(() => {
+    // 1. Check for a stored token in local storage first
+    let tokenFromStorage = window.localStorage.getItem('spotify_token');
 
-    if (!tokenFromHash && hash) {
+    if (tokenFromStorage) {
+      setToken(tokenFromStorage);
+      return; // Stop execution if a token is found
+    }
+
+    // 2. If no token is in local storage, check the URL hash
+    const hash = window.location.hash;
+    if (hash) {
       const tokenString = hash.substring(1).split('&').find(elem => elem.startsWith('access_token'));
       if (tokenString) {
-        tokenFromHash = tokenString.split('=')[1];
+        const tokenFromHash = tokenString.split('=')[1];
         window.localStorage.setItem('spotify_token', tokenFromHash);
+        setToken(tokenFromHash);
       }
       window.location.hash = ''; // Clear the hash from the URL
     }
-    setToken(tokenFromHash);
   }, []);
 
   const savePlaylists = (pls) => {
