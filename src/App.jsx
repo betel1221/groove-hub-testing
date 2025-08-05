@@ -24,7 +24,7 @@ function App() {
   });
   const [selectedPlaylistId, setSelectedPlaylistId] = useState(null);
 
-   useEffect(() => {
+  useEffect(() => {
     // 1. Check for a stored token in local storage first
     let tokenFromStorage = window.localStorage.getItem('spotify_token');
 
@@ -37,6 +37,7 @@ function App() {
     const hash = window.location.hash;
     if (hash) {
       const tokenString = hash.substring(1).split('&').find(elem => elem.startsWith('access_token'));
+      
       if (tokenString) {
         const tokenFromHash = tokenString.split('=')[1];
         window.localStorage.setItem('spotify_token', tokenFromHash);
